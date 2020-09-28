@@ -327,20 +327,7 @@ getBinaryOpenjdk()
 					gzip -cd $jar_name | tar xof - -C $extract_dir --strip 1
 				fi
 			else
-				if [ -d "$SDKDIR/openjdkbinary/tmp" ]; then
-					rm -rf $SDKDIR/openjdkbinary/tmp/*
-				else
-					mkdir $SDKDIR/openjdkbinary/tmp
-				fi
 				echo "unzip file: $jar_name ..."
-				if [[ $jar_name == *zip || $jar_name == *jar ]]; then
-					unzip -q $jar_name -d ./tmp
-				elif [[ $jar_name == *.pax* ]]; then
-					cd ./tmp
-					pax -p xam -rzf ../$jar_name
-				else
-					gzip -cd $jar_name | tar xof - -C ./tmp
-				fi
 
 				cd $SDKDIR/openjdkbinary/tmp
 				jar_dirs=`ls -d */`
